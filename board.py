@@ -10,6 +10,15 @@ def main():
     )
     return main
 
+def cancel():
+    cancel = ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text='❌ Отмена')]
+        ],
+        resize_keyboard=True
+    )
+    return cancel
+
 def items_board(items):
     buttons = []
     for i in items:
