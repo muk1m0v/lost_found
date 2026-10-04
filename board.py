@@ -3,8 +3,9 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMar
 def main():
     main = ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text='➕ Добавить'), KeyboardButton(text='📚 Вещи')],
-            [KeyboardButton(text='📊 Мои заявки')]
+            [KeyboardButton(text='➕ Добавить'), KeyboardButton(text='📚 Список найденных вещей')],
+            [KeyboardButton(text='🔍 Карточка вещи'), KeyboardButton(text='📊 Мои заявки')],
+            [KeyboardButton(text='📥 Заявки на мои вещи')]
         ],
         resize_keyboard=True
     )

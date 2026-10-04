@@ -83,6 +83,7 @@ async def photo_bad(message: Message, state: FSMContext):
     await message.answer('Пожалуйста, отправьте фото предмета:', reply_markup=cancel())
 
 @router.message(Command('item'))
+@router.message(F.text == '🔍 Карточка вещи')
 async def one_item(message: Message, state: FSMContext):
     await state.set_state(ShowItem.item_id)
     await message.answer('Введите ID вещи:', reply_markup=cancel())
@@ -101,6 +102,7 @@ async def one_item_id(message: Message, state: FSMContext):
     await message.answer_photo(photo=item['photo_file_id'], caption=item_text(item), reply_markup=item_board(item['id']))
 
 @router.message(Command('claims'))
+@router.message(F.text == '📥 Заявки на мои вещи')
 async def owners_list(message: Message, state: FSMContext):
     await state.set_state(ShowClaims.item_id)
     await message.answer('Введите ID твоей вещи:', reply_markup=cancel())

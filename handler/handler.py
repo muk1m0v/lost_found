@@ -29,6 +29,7 @@ async def start(message: Message):
 
 @router.message(Command('items'))
 @router.message(F.text == '📚 Вещи')
+@router.message(F.text == '📚 Список найденных вещей')
 async def tasks(message: Message):
     rows = await get_items()
     if not rows:
