@@ -4,7 +4,7 @@ from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 from board import *
 from service import *
-from states.states import AddItem, ShowItem, ShowClaims
+from states.states import AddItem, ShowClaims
 
 router = Router()
 
@@ -85,21 +85,15 @@ async def photo_bad(message: Message, state: FSMContext):
 @router.message(Command('item'))
 @router.message(F.text == '🔍 Карточка вещи')
 async def one_item(message: Message, state: FSMContext):
-    await state.set_state(ShowItem.item_id)
-    await message.answer('Введите ID вещи:', reply_markup=cancel())
-
-@router.message(ShowItem.item_id, F.text, ~F.text.startswith('/'))
-async def one_item_id(message: Message, state: FSMContext):
-    item_id = check_id(message.text)
-    if item_id is None:
-        await message.answer('id должен быть числом больше 0. Попробуйте ещё раз:', reply_markup=cancel())
-        return
-    item = await get_item(item_id)
     await state.clear()
-    if item is None:
-        await message.answer('Вещь не найдена.', reply_markup=main())
+    rows = await get_items()
+    if not rows:
+        await message.answer('Список пуст.')
         return
-    await message.answer_photo(photo=item['photo_file_id'], caption=item_text(item), reply_markup=item_board(item['id']))
+    text = 'Выберите вещь:\n\n'
+    for i in rows:
+        text += f"🔹 {i['title']}\n"
+    await message.answer(text, reply_markup=items_board(rows))
 
 @router.message(Command('claims'))
 @router.message(F.text == '📥 Заявки на мои вещи')

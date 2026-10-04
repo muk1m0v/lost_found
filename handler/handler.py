@@ -35,9 +35,9 @@ async def tasks(message: Message):
     if not rows:
         await message.answer('Список пуст.')
         return
-    text = 'Доступные вещи:\n\n'
+    text = 'Выберите вещь:\n\n'
     for i in rows:
-        text += f"{i['id']}. {i['title']} — {i['location']}\n"
+        text += f"🔹 {i['title']}\n"
     await message.answer(text, reply_markup=items_board(rows))
 
 @router.message(Command('my_claims'))

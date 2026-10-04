@@ -23,7 +23,7 @@ def cancel():
 def items_board(items):
     buttons = []
     for i in items:
-        buttons.append([InlineKeyboardButton(text='Подробнее', callback_data=f"item:show:{i['id']}")])
+        buttons.append([InlineKeyboardButton(text=i['title'], callback_data=f"item:show:{i['id']}")])
     return InlineKeyboardMarkup(inline_keyboard=buttons)
 
 def item_board(item_id):
