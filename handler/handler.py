@@ -25,9 +25,10 @@ async def start(message: Message):
     if not is_login:
         await save_user(user.id, user.username, user.full_name)
     text = f'Welcome, <b>{user.full_name}</b>'
-    await message.answer(text, parse_mode='HTML')
+    await message.answer(text, parse_mode='HTML', reply_markup=main())
 
 @router.message(Command('items'))
+@router.message(F.text == '📚 Вещи')
 async def tasks(message: Message):
     rows = await get_items()
     if not rows:
@@ -39,6 +40,7 @@ async def tasks(message: Message):
     await message.answer(text, reply_markup=items_board(rows))
 
 @router.message(Command('my_claims'))
+@router.message(F.text == '📊 Мои заявки')
 async def my_list(message: Message):
     user = message.from_user
     rows = await my_claims(user.id)

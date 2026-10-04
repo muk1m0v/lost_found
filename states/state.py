@@ -21,6 +21,7 @@ def item_text(item):
     return f"🔹 {item['title']}\n\nОписание: {item['description']}\n📍 Место: {item['location']}"
 
 @router.message(Command('add_item'))
+@router.message(F.text == '➕ Добавить')
 async def add_one(message: Message, state: FSMContext):
     await state.set_state(AddItem.title)
     await message.answer('Шаг 1/4. Введите название предмета:')

@@ -1,4 +1,5 @@
 from aiogram import Dispatcher, Bot
+from aiogram.types import BotCommand
 from mukimov.color import green
 from services.db import *
 from services.storage import DictStorage
@@ -18,6 +19,16 @@ async def main():
     dp.include_router(router)
     dp.include_router(state_router)
     await init_tables()
+    await bot.set_my_commands([
+        BotCommand(command='start', description='запуск бота'),
+        BotCommand(command='help', description='помощь'),
+        BotCommand(command='add_item', description='добавить найденную вещь'),
+        BotCommand(command='items', description='список доступных вещей'),
+        BotCommand(command='item', description='карточка вещи'),
+        BotCommand(command='my_claims', description='мои заявки'),
+        BotCommand(command='claims', description='заявки на твою вещь'),
+        BotCommand(command='cancel', description='отменить ввод')
+    ])
     await dp.start_polling(bot)
 
 if __name__ == '__main__':

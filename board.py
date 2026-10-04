@@ -1,4 +1,14 @@
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
+
+def main():
+    main = ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text='➕ Добавить'), KeyboardButton(text='📚 Вещи')],
+            [KeyboardButton(text='📊 Мои заявки')]
+        ],
+        resize_keyboard=True
+    )
+    return main
 
 def items_board(items):
     buttons = []
