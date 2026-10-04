@@ -1,0 +1,4 @@
+aiogram>=3.0,<4
+asyncpg
+python-dotenv
+mukimov
